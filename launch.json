@@ -1,25 +1,22 @@
 {
   "kind": "evm_project",
-  "chainId": 11155111,
   "token": {
+    "contract": "Bid",
     "name": "Bid",
     "symbol": "BID",
-    "decimals": 18,
-    "totalSupply": "1000000000000000000000000000",
-    "contract": "src/Bid.sol:Bid",
-    "constructorArgs": []
+    "decimals": 18
   },
   "contracts": [
     {
-      "name": "SealedBidAuction",
-      "contract": "src/SealedBidAuction.sol:SealedBidAuction",
+      "contract": "SealedBidAuction",
       "constructorArgs": ["$token"]
     }
   ],
   "pool": {
-    "currency": "0x0000000000000000000000000000000000000000",
+    "pairedCurrency": "0x0000000000000000000000000000000000000000",
     "fee": 3000,
     "tickSpacing": 60,
     "initialPrice": "79228162514264337593543950336"
-  }
+  },
+  "notes": "Sepolia project launch. Bid has a zero-argument constructor that mints its entire fixed supply to its deployer, with no later mint path. SealedBidAuction takes only the deployed BID address via $token. Neither contract has an owner, administrator, upgrade mechanism, or fee; no initialization calls are required. Sellers list off-chain item identifiers with a reserve and commit deadline. Bidders commit domain-separated hashes and lock BID, then reveal during the following one-day window. The highest valid revealed bid wins; ties favor the earlier commitment. Anyone may finalize after the reveal window, crediting the winning price to the seller for withdrawal. Other bidders, including non-revealers, withdraw their full locks; the winner withdraws any excess. Item ownership and delivery are not enforced. Only the supplied exact-transfer BID is supported. Application mutations use a shared reentrancy guard, checks-effects-interactions, and events. The native-ETH pool has no hook; initialPrice is decimal sqrtPriceX96, not a promised valuation. Independent review must cover the final manifest and accepted implementation before deployment. Contributors never broadcast; only the authorized deployer executes the admitted release."
 }
