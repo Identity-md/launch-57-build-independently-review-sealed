@@ -1,0 +1,25 @@
+{
+  "kind": "evm_project",
+  "chainId": 11155111,
+  "token": {
+    "name": "Bid",
+    "symbol": "BID",
+    "decimals": 18,
+    "totalSupply": "1000000000000000000000000000",
+    "contract": "src/Bid.sol:Bid",
+    "constructorArgs": []
+  },
+  "contracts": [
+    {
+      "name": "SealedBidAuction",
+      "contract": "src/SealedBidAuction.sol:SealedBidAuction",
+      "constructorArgs": ["$token"]
+    }
+  ],
+  "pool": {
+    "currency": "0x0000000000000000000000000000000000000000",
+    "fee": 3000,
+    "tickSpacing": 60,
+    "initialPrice": "79228162514264337593543950336"
+  }
+}
